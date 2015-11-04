@@ -23,5 +23,15 @@ defmodule MyList do
     do: [from| span(from+1,to)]
   def span(to,to),
     do: [to]
-    
+  def all?([],func), do: true
+  def all?([head|tail],func), do:
+    func.(head) && all?(tail,func)        
+  def each([],_func), do: [] 
+  def each([head|tail],func), do:
+    [func.(head) | each(tail,func)]
+
+  #def filter
+  #def split
+  #def take
+
 end
