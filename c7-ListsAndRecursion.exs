@@ -51,5 +51,12 @@ defmodule MyList do
 
 
   def split(list, n), do: {take(list, n), rest( list, n)}
+  
+  def flatten(list), do: _flatten(list,[])
+
+  defp _flatten([],result), do: Enum.reverse(result)
+  defp _flatten([[head | []] | tail ], result), do: _flatten([ head | tail ], result)
+  defp _flatten([[head | tail ] | other], result), do: _flatten([head, tail | other], result)
+  defp _flatten([head | tail], result), do: _flatten(tail, [head | result])
 
 end
