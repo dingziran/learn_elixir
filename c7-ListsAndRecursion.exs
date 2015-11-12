@@ -59,4 +59,19 @@ defmodule MyList do
   defp _flatten([[head | tail ] | other], result), do: _flatten([head, tail | other], result)
   defp _flatten([head | tail], result), do: _flatten(tail, [head | result])
 
+  def primes_up_to(n) do
+    range = span(2, n)
+    range -- (for a <- range, b <- range, a <= b, a*b <= n, do: a*b)
+  end
+
+  def tax(orders, tax_rates) do
+    orders |> Enum.map(&_add_total(&1, tax_rates))
+  end
+
+  defp _add_total(order = [id: _, ship_to: state, net_amount: net], tax_rates) do
+    tax_rate = Keyword.get(tax_rates, state, 0)
+    tax = net * tax_rate
+    total = net+tax
+    Keyword.put(order, :total_amount, total)
+  end    
 end
