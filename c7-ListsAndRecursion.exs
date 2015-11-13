@@ -62,7 +62,7 @@ defmodule MyList do
   def primes_up_to(n) do
     range = span(2, n)
     range -- (for a <- range, b <- range, a <= b, a*b <= n, do: a*b)
-  end
+  end 
 
   def tax(orders, tax_rates) do
     orders |> Enum.map(&_add_total(&1, tax_rates))
