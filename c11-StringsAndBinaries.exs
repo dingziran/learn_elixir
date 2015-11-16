@@ -18,4 +18,11 @@ defmodule MyString do
   defp _parse_number({value, []}), do: value
   defp _parse_number({value, [ ?\s | rest ]}), do: _parse_number({value, rest})
 
+  def center(list) do
+    length = max_length(list)
+    for( str <- list, do: IO.puts String.ljust( String.rjust( str, div( length + (String.length str), 2)), length))
+  end
+
+  defp max_length(list), do: Enum.reduce(list, 0, (fn elm, acc -> if( (String.length elm) < acc, do: acc, else: (String.length elm)) end))
+
 end
