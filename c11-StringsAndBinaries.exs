@@ -25,4 +25,12 @@ defmodule MyString do
 
   defp max_length(list), do: Enum.reduce(list, 0, (fn elm, acc -> if( (String.length elm) < acc, do: acc, else: (String.length elm)) end))
 
+  def capitalize_sentences(string) do 
+    string
+    |> String.split( ~r{\.\s+} )
+    |> Enum.map(&String.capitalize(&1))
+    |> Enum.join(". ")
+  end
+
+
 end
