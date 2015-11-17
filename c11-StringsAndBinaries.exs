@@ -32,5 +32,24 @@ defmodule MyString do
     |> Enum.join(". ")
   end
 
+  def read_from_file(filename) do
+    file = File.open!(filename)
+    headers = IO.read(file, :line) |> parse_headers
+    Enum.map IO.stream(file, :line), &(parse_order(&1, headers))
+  end
 
+  defp parse_headers(line) do
+    line
+    |> String.strip |> String.split(",")
+    |> Enum.map(&String.to_atom/1)
+  end  
+
+  defp parse_order(line, headers) do
+    order = line |> String.strip |> String.split(",") |> convert_types
+    Enum.zip headers, order
+  end
+
+  defp convert_types([id, ":" <> city, net_amount]) do
+    [String.to_integer(id), String.to_atom(city), String.to_float(net_amount)]
+  end
 end
