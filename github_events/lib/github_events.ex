@@ -1,0 +1,2 @@
+defmodule GithubEvents do
+end
