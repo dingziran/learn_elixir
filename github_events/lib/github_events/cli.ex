@@ -18,7 +18,7 @@ defmodule Github_events.CLI do
 	end	
 
 	def process({user, project, _count}) do
-	  Github_events.Events.fetch(user, project)
+	  Events.GithubEvents.fetch(user, project)
 	end
 
 	@doc """
